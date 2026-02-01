@@ -1,26 +1,29 @@
-function sendFeedback() {
-    var name = document.getElementById("name").value;
-    var message = document.getElementById("message").value;
+const form = document.getElementById("feedbackForm");
 
-    if (!name || !message) {
-        alert("Vui lòng nhập đầy đủ thông tin!");
-        return;
-    }
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
 
-    fetch(SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify({
-            name: name,
-            message: message
-        })
+  const data = {
+    name: document.getElementById("name").value,
+    rating: document.getElementById("rating").value,
+    comment: document.getElementById("comment").value
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycbwMn_HZ-RvxdVp7D7w-nQfWxiWjkMekIlzzflcCf0LWaDu9ya6g7HXZ0Euz_AcAGu4F/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+    .then(response => response.json())
+    .then(result => {
+      alert("Cảm ơn bạn đã gửi đánh giá!");
+      form.reset();
     })
-    .then(res => res.text())
-    .then(() => {
-        document.getElementById("result").innerText = "✅ Gửi thành công!";
-        document.getElementById("name").value = "";
-        document.getElementById("message").value = "";
-    })
-    .catch(() => {
-        document.getElementById("result").innerText = "❌ Có lỗi xảy ra!";
+    .catch(error => {
+      alert("Có lỗi xảy ra, vui lòng thử lại!");
+      console.error(error);
     });
-}
+});
+
