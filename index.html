@@ -1,22 +1,43 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Phản hồi khách hàng</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Đánh giá khách hàng</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Link CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="box">
-    <h2>📢 Gửi phản hồi</h2>
+  <div class="container">
+    <h1>Đánh giá & phản hồi</h1>
+    <p>Chúng tôi rất mong nhận được ý kiến của bạn 💙</p>
 
-    <input type="text" id="name" placeholder="Tên của bạn">
-    <textarea id="message" rows="4" placeholder="Nhập đánh giá"></textarea>
+    <form id="feedbackForm">
+      
+      <label for="name">Tên của bạn</label>
+      <input type="text" id="name" placeholder="Nhập tên..." required>
 
-    <button onclick="sendFeedback()">Gửi</button>
-    <p id="result"></p>
-</div>
+      <label for="rating">Mức độ hài lòng</label>
+      <select id="rating" required>
+        <option value="">-- Chọn mức đánh giá --</option>
+        <option value="1">⭐ 1 - Rất không hài lòng</option>
+        <option value="2">⭐⭐ 2</option>
+        <option value="3">⭐⭐⭐ 3 - Bình thường</option>
+        <option value="4">⭐⭐⭐⭐ 4</option>
+        <option value="5">⭐⭐⭐⭐⭐ 5 - Rất hài lòng</option>
+      </select>
 
-<script src="script.js"></script>
+      <label for="comment">Nhận xét</label>
+      <textarea id="comment" rows="4" placeholder="Nhập đánh giá của bạn..." required></textarea>
+
+      <button type="submit">Gửi đánh giá</button>
+    </form>
+  </div>
+
+  <!-- Link JS -->
+  <script src="script.js"></script>
 </body>
 </html>
+
