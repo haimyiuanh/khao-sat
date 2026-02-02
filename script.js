@@ -1,25 +1,35 @@
-const form = document.getElementById("feedbackForm");
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("feedbackForm");
 
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
+  if (!form) {
+    alert("KHÔNG tìm thấy form feedbackForm");
+    return;
+  }
 
-  const data = {
-    name: document.getElementById("name").value,
-    rating: document.getElementById("rating").value,
-    comment: document.getElementById("comment").value
-  };
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-  fetch("https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLixRnFzLzHGfnuLGoNcYFuH2Pi5bXtTzbES2njKUgaqflbFD8AXGUikLGVxkEGwg2D27I0o3txmSLQICI38bNqvIY17ybyuJIgW1H6zqjGTrflql9mBQFCbXh7H6TOEZztphunZ-pIZFFc-0t35tDE2MlS8Afu7xKbwFF7tlZr5Vbqc5X4oAxHduuzp2MHYyq2Dq6mrlzlYOhyrffALtM477Wq5jZ-Be67lrXMWYL-i7ugW8OlVcZOlfm3Cd2YfQcs9oLWmkb1M7L6pbFJCeTVVdps3Eg&lib=MeRBDvhNyN2dNnjjFkP1mqD_DLMbnuuk7", {
-    method: "POST",
-    body: JSON.stringify(data)
-  })
-    .then(res => res.json())
-    .then(result => {
-      alert("Gửi thành công");
-      console.log(result);
+    alert("JS đã chạy, đang gửi dữ liệu...");
+
+    const data = {
+      name: document.getElementById("name").value,
+      rating: document.getElementById("rating").value,
+      comment: document.getElementById("comment").value
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbwMn_HZ-RvxdVp7D7w-nQfWxiWjkMekIlzzflcCf0LWaDu9ya6g7HXZ0Euz_AcAGu4F/exec", {
+      method: "POST",
+      body: JSON.stringify(data)
     })
-    .catch(err => {
-      alert("Lỗi khi gửi");
-      console.error(err);
-    });
+      .then(res => res.json())
+      .then(result => {
+        alert("Gửi thành công!");
+        console.log(result);
+        form.reset();
+      })
+      .catch(err => {
+        alert("LỖI khi gửi");
+        console.error(err);
+      });
+  });
 });
